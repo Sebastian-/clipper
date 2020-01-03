@@ -1,0 +1,12 @@
+.title-search-container {
+  form {
+    max-width: $max-content-width;
+    margin: 0 auto;
+
+    input {
+      width: 100%;
+      border: none;
+      padding: 10px;
+    }
+  }
+}

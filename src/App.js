@@ -1,13 +1,13 @@
 import React from "react";
-import "./App.css";
+import "./styles/styles.scss";
 import { Switch, Route } from "react-router-dom";
-import NavBar from "./NavBar/NavBar";
-import Home from "./Home/Home";
-import Discover from "./Discover/Discover";
-import Favorites from "./Favorites/Favorites";
-import Rated from "./Rated/Rated";
-import About from "./About/About";
-import TitleSearch from "./TitleSearch/TitleSearch";
+import NavBar from "./components/NavBar";
+import Home from "./components/Home";
+import Discover from "./components/Discover";
+import Favorites from "./components/Favorites";
+import Rated from "./components/Rated";
+import About from "./components/About";
+import TitleSearch from "./components/TitleSearch";
 
 function App() {
   return (
