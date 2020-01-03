@@ -7,6 +7,7 @@ import Discover from "./Discover/Discover";
 import Favorites from "./Favorites/Favorites";
 import Rated from "./Rated/Rated";
 import About from "./About/About";
+import TitleSearch from "./TitleSearch/TitleSearch";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <main>
         <Switch>
           <Route exact path="/">
+            <TitleSearch />
             <Home />
           </Route>
           <Route path="/discover">
