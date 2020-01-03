@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import "./NavBar.css";
 
-const links = [
+const routes = [
   { path: "/", name: "Home" },
   { path: "/discover", name: "Discover" },
   { path: "/favorites", name: "Favorites" },
@@ -21,28 +21,30 @@ function NavBar(props) {
 
   return (
     <div className="navbar-container">
-      <div className="navbar">
-        <h1>Clipper</h1>
-        <button className="btn-menu" onClick={toggleMenu}>
-          <FontAwesomeIcon icon={faBars} />
-        </button>
+      <div className="navbar-content">
+        <div className="navbar">
+          <h1>Clipper</h1>
+          <button className="btn-menu" onClick={toggleMenu}>
+            <FontAwesomeIcon icon={faBars} />
+          </button>
+        </div>
+        <nav className={displayNav ? "active" : null}>
+          <ul>
+            {routes.map(route => (
+              <li key={route.path}>
+                <NavLink
+                  exact
+                  to={route.path}
+                  activeClassName="active"
+                  onClick={toggleMenu}
+                >
+                  {route.name}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
-      <nav className={displayNav ? "active" : null}>
-        <ul>
-          {links.map(link => (
-            <li key={link.path}>
-              <NavLink
-                exact
-                to={link.path}
-                activeClassName="active"
-                onClick={toggleMenu}
-              >
-                {link.name}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-      </nav>
     </div>
   );
 }
