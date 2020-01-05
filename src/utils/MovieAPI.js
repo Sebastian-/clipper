@@ -17,9 +17,29 @@ function getResource(path) {
     .catch(error => console.log(error));
 }
 
+export async function getDiscoverMovies(year, genres, order) {
+  try {
+    const response = await getResource(
+      `/discover/movie?${year ? `year=${year}` : ""}${
+        order ? `&sort_by=${order}` : ""
+      }${genres.length !== 0 ? `&with_genres=${genres.join(",")}` : ""}`
+    );
+    return response.results.map(movie => ({
+      ...movie,
+      poster_src: getPosterURL(movie.poster_path)
+    }));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function getMovieGenres() {
-  let genres = await getResource("/genre/movie/list");
-  console.log(genres);
+  try {
+    const response = await getResource("/genre/movie/list");
+    return response.genres;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export function getMoviesByCategory(category) {
