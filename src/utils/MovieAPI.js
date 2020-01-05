@@ -10,25 +10,23 @@ const api = Axios.create({
   }
 });
 
-function getResource(path) {
+export function getMovies(category) {
+  return getMovieResource(`/${category}`);
+}
+
+function getMovieResource(path) {
   return api
     .get(path)
     .then(response => response.data.results)
+    .then(movies =>
+      movies.map(movie => ({
+        ...movie,
+        poster_src: getPosterURL(movie.poster_path)
+      }))
+    )
     .catch(error => console.log(error));
 }
 
-export function getPopular() {
-  return getResource("/popular");
-}
-
-export function getTopRated() {
-  return getResource("/top_rated");
-}
-
-export function getUpcoming() {
-  return getResource("/upcoming");
-}
-
-export function getNowPlaying() {
-  return getResource("now_playing");
+export function getPosterURL(path) {
+  return "https://image.tmdb.org/t/p/w300" + path;
 }

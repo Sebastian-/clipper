@@ -9,7 +9,11 @@
   }
 
   .navbar {
-    position: relative;
+    position: fixed;
+    color: inherit;
+    background-color: inherit;
+    top: 0;
+    left: 0;
     width: 100%;
     padding: 10px;
     display: flex;
@@ -39,6 +43,7 @@
     position: fixed;
     background-color: inherit;
     color: inherit;
+    z-index: 99;
     opacity: 0.95;
     top: 0;
     padding-top: $navbar-height;
@@ -60,6 +65,7 @@
   }
 
   nav a {
+    font-size: 1.2em;
     display: block;
     text-decoration: none;
     padding: 0 10px;
@@ -82,11 +88,12 @@
     .navbar-content {
       display: flex;
       padding: 10px;
-      max-width: 900px;
+      max-width: $max-content-width;
       margin: 0 auto;
     }
 
     .navbar {
+      position: relative;
       width: auto;
       flex: 1;
       padding: 0;
