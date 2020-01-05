@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import * as MovieAPI from "../utils/MovieAPI";
+import { getMoviesByCategory } from "../utils/MovieAPI";
 import MovieList from "./MovieList";
 import Select from "react-select";
 
-const movieOptions = [
+const movieCategory = [
   { value: "popular", label: "Popular" },
   { value: "top_rated", label: "Top Rated" },
   { value: "upcoming", label: "Upcoming" },
@@ -12,12 +12,12 @@ const movieOptions = [
 
 function Home(props) {
   const [movies, setMovies] = useState([]);
-  const [option, setOption] = useState(movieOptions[0]);
+  const [option, setOption] = useState(movieCategory[0]);
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const movies = await MovieAPI.getMovies(option.value);
+        const movies = await getMoviesByCategory(option.value);
         setMovies(movies.slice(0, 12));
       } catch (error) {
         console.log(error);
@@ -30,7 +30,7 @@ function Home(props) {
   return (
     <div className="page-container">
       <h2>{option.label}</h2>
-      <Select options={movieOptions} value={option} onChange={setOption} />
+      <Select options={movieCategory} value={option} onChange={setOption} />
       <MovieList movies={movies} />
     </div>
   );
