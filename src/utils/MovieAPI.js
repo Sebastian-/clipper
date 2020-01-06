@@ -3,7 +3,7 @@ import credentials from "./credentials.js";
 
 const api = Axios.create({
   baseURL: "https://api.themoviedb.org/3",
-  timeout: 5000,
+  timeout: 3000,
   headers: {
     Authorization: `Bearer ${credentials.movieAPI.authKey}`,
     "Content-Type": "application/json; charset=utf-8"
@@ -15,6 +15,15 @@ function getResource(path) {
     .get(path)
     .then(response => response.data)
     .catch(error => console.log(error));
+}
+
+export async function getMovieDetails(id) {
+  const response = await api.get(`/movie/${id}`);
+  console.log(response.data);
+  return {
+    ...response.data,
+    poster_src: getPosterURL(response.data.poster_path)
+  };
 }
 
 export async function searchMovies(query) {
