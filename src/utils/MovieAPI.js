@@ -17,6 +17,18 @@ function getResource(path) {
     .catch(error => console.log(error));
 }
 
+export async function searchMovies(query) {
+  const response = await api.get("/search/movie", {
+    params: {
+      query: query
+    }
+  });
+  return response.data.results.map(movie => ({
+    ...movie,
+    poster_src: getPosterURL(movie.poster_path)
+  }));
+}
+
 export async function getDiscoverMovies(year, genres, order) {
   try {
     const response = await getResource(

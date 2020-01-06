@@ -8,6 +8,7 @@ import Favorites from "./components/Favorites";
 import Rated from "./components/Rated";
 import About from "./components/About";
 import TitleSearch from "./components/TitleSearch";
+import SearchResults from "./components/SearchResults";
 
 function App() {
   return (
@@ -23,6 +24,10 @@ function App() {
           </Route>
           <Route path="/discover">
             <Discover />
+          </Route>
+          <Route path="/search">
+            <TitleSearch />
+            <SearchResults />
           </Route>
           <Route path="/favorites">
             <Favorites />
