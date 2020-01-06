@@ -5,10 +5,14 @@ import { getMovieGenres, getDiscoverMovies } from "../utils/MovieAPI";
 import MovieList from "./MovieList";
 
 function Discover(props) {
-  const [year, setYear] = useState();
-  const [genre, setGenre] = useState([]);
-  const [order, setOrder] = useState();
-  const [movies, setMovies] = useState([]);
+  const sortOptions = [
+    { value: "popularity.desc", label: "Popularity Descending" },
+    { value: "popularity.asc", label: "Popularity Ascending" },
+    { value: "release_date.desc", label: "Release Date Descending" },
+    { value: "release_date.asc", label: "Release Date Ascending" },
+    { value: "original_title.asc", label: "Title (A - Z)" },
+    { value: "original_title.desc", label: "Title (Z - A)" }
+  ];
 
   const genreOptions = async () => {
     try {
@@ -26,7 +30,7 @@ function Discover(props) {
   const yearOptions = () => {
     let years = [];
 
-    for (let i = 1920; i <= new Date().getFullYear(); i++) {
+    for (let i = new Date().getFullYear(); i >= 1920; i--) {
       years.push({
         value: i,
         label: i.toString()
@@ -36,19 +40,19 @@ function Discover(props) {
     return years;
   };
 
-  const sortOptions = [
-    { value: "popularity.desc", label: "Popularity Descending" },
-    { value: "popularity.asc", label: "Popularity Ascending" },
-    { value: "release_date.desc", label: "Release Date Descending" },
-    { value: "release_date.asc", label: "Release Date Ascending" },
-    { value: "original_title.asc", label: "Title (A - Z)" },
-    { value: "original_title.desc", label: "Title (Z - A)" }
-  ];
+  const [year, setYear] = useState();
+  const [genre, setGenre] = useState([]);
+  const [order, setOrder] = useState(sortOptions[0]);
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     const discoverMovies = async () => {
       try {
-        const movies = await getDiscoverMovies(year, genre, order);
+        const movies = await getDiscoverMovies(
+          year ? year.value : null,
+          toGenreIds(genre),
+          order ? order.value : null
+        );
         setMovies(movies);
       } catch (error) {
         console.log(error);
@@ -58,9 +62,8 @@ function Discover(props) {
     discoverMovies();
   }, [year, genre, order]);
 
-  const handleGenreSelect = options => {
-    const values = options.map(option => option.value);
-    setGenre(values);
+  const toGenreIds = genres => {
+    return genres ? genres.map(genre => genre.value) : [];
   };
 
   return (
@@ -72,7 +75,8 @@ function Discover(props) {
         <Select
           id="year"
           options={yearOptions()}
-          onChange={option => setYear(option.value)}
+          onChange={setYear}
+          value={year}
         />
       </div>
       <div>
@@ -83,7 +87,8 @@ function Discover(props) {
           cacheOptions
           defaultOptions
           loadOptions={genreOptions}
-          onChange={handleGenreSelect}
+          onChange={setGenre}
+          value={genre}
         />
       </div>
       <div>
@@ -91,8 +96,8 @@ function Discover(props) {
         <Select
           id="order"
           options={sortOptions}
-          defaultValue={sortOptions[0]}
-          onChange={option => setOrder(option.value)}
+          value={order}
+          onChange={setOrder}
         />
       </div>
       <MovieList movies={movies} />
