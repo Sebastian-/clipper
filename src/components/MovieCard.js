@@ -3,21 +3,23 @@ import placeholder from "../img/placeholder.jpg";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { Link } from "react-router-dom";
+import { getPosterURL } from "../utils/MovieAPI";
 
-function Movie(props) {
+function MovieCard(props) {
   const {
-    poster_src,
+    poster_path,
     title,
     release_date,
     vote_average,
-    overview
+    overview,
+    id
   } = props.movie;
 
   // image error handling https://stackoverflow.com/a/52622379
   return (
     <div className="movie-card">
       <img
-        src={poster_src}
+        src={getPosterURL(poster_path)}
         alt={"Poster for " + title}
         onError={e => {
           if (e.target.src !== placeholder) {
@@ -45,13 +47,13 @@ function Movie(props) {
             <p>{release_date}</p>
           </div>
         </div>
-        <p className="card-content">{overview}</p>
+        <p className="overview">{overview}</p>
         <div className="card-footer">
-          <Link to="">More Info</Link>
+          <Link to={`/movie/${id}`}>More Info</Link>
         </div>
       </div>
     </div>
   );
 }
 
-export default Movie;
+export default MovieCard;
