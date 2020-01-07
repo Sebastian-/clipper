@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 import {
   isFavorited,
   addFavorite,
@@ -21,11 +21,22 @@ function FavoriteMovieBtn(props) {
     }
   }
 
+  const styles = {
+    liked: {
+      color: "#fce413"
+    },
+    unliked: {
+      color: "grey"
+    }
+  };
+
   return (
-    <button onClick={handleClick}>
-      {/* <FontAwesomeIcon icon={faHeart} /> */}
-      {favorited.toString()}
-    </button>
+    <div className="fav-movie-btn" onClick={handleClick}>
+      <button style={favorited ? styles.liked : styles.unliked}>
+        <FontAwesomeIcon icon={faStar} />{" "}
+      </button>
+      {favorited ? "Favorited" : "Click to Favorite"}
+    </div>
   );
 }
 
