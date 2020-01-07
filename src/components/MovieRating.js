@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import { getRating, addRating } from "../utils/localStorageAPI";
+import { CircularProgressbar } from "react-circular-progressbar";
 
 function MovieRating(props) {
   const [rating, setRating] = useState(getRating(props.movie));
@@ -24,12 +25,24 @@ function MovieRating(props) {
   return (
     <div>
       {rating ? (
-        rating.toString()
+        <CircularProgressbar
+          value={rating * 10}
+          text={`${rating}`}
+          strokeWidth={10}
+          styles={{
+            root: {
+              width: "60px"
+            },
+            text: {
+              fontSize: "30px"
+            }
+          }}
+        />
       ) : (
         <Select
           options={ratingOptions()}
-          value={{ value: rating, label: rating }}
           onChange={handleSelect}
+          placeholder={""}
         />
       )}
     </div>
