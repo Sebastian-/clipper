@@ -26,7 +26,6 @@ export function removeFavorite(movie) {
   }
 }
 
-// returns an array of movie objects
 export function getFavorites() {
   const favorites = localStorage.getItem("favorites");
   if (!favorites) {
@@ -39,9 +38,9 @@ export function isFavorited(movie) {
   const favorites = localStorage.getItem("favorites");
   if (!favorites) {
     return false;
-  } else {
-    return JSON.parse(favorites).indexOf(movie.id) >= 0;
   }
+
+  return JSON.parse(favorites).includes(movie.id);
 }
 
 export function addRating(movie, rating) {
@@ -52,7 +51,10 @@ export function addRating(movie, rating) {
     rated = [];
   }
 
-  rated.push(rating);
+  rated.push({
+    id: movie.id,
+    rating
+  });
   localStorage.setItem("rated", JSON.stringify(rated));
   addMovie(movie);
 }
@@ -62,7 +64,20 @@ export function getRated() {
   if (!rated) {
     return [];
   }
-  return JSON.parse(rated).map(id => JSON.parse(localStorage.getItem(id)));
+  return JSON.parse(rated).map(rating =>
+    JSON.parse(localStorage.getItem(rating.id))
+  );
+}
+
+export function isRated(movie) {
+  const rated = localStorage.getItem("rated");
+  if (!rated) {
+    return false;
+  }
+
+  return JSON.parse(rated)
+    .map(rating => rating.id)
+    .includes(movie.id);
 }
 
 function addMovie(movie) {
@@ -71,4 +86,11 @@ function addMovie(movie) {
   } else {
     localStorage.setItem(movie.id, JSON.stringify(movie));
   }
+}
+
+function removeMovie(movie) {
+  if (isRated(movie)) {
+    return;
+  }
+  localStorage.removeItem(movie.id);
 }
