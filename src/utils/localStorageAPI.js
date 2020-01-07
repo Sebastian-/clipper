@@ -23,6 +23,7 @@ export function removeFavorite(movie) {
   if (i !== -1) {
     favorites.splice(i, 1);
     localStorage.setItem("favorites", JSON.stringify(favorites));
+    removeMovie(movie);
   }
 }
 
@@ -67,6 +68,17 @@ export function getRated() {
   return JSON.parse(rated).map(rating =>
     JSON.parse(localStorage.getItem(rating.id))
   );
+}
+
+export function getRating(movie) {
+  let rated = localStorage.getItem("rated");
+  if (!rated) {
+    return null;
+  }
+
+  rated = JSON.parse(rated);
+  const i = rated.findIndex(rating => rating.id === movie.id);
+  return rated[i].rating;
 }
 
 export function isRated(movie) {
