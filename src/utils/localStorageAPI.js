@@ -78,6 +78,7 @@ export function getRating(movie) {
 
   rated = JSON.parse(rated);
   const i = rated.findIndex(rating => rating.id === movie.id);
+  if (i === -1) return null;
   return rated[i].rating;
 }
 
