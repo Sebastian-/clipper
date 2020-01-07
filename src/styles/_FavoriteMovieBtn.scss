@@ -1,18 +1,9 @@
 .fav-movie-btn {
-  display: flex;
-  align-items: center;
-  font-size: 1.2rem;
+  display: block;
+  font-size: 2rem;
+  background-color: transparent;
+  border: none;
+  padding: 0;
   cursor: pointer;
-
-  button {
-    display: block;
-    font-size: 2rem;
-    background-color: transparent;
-    color: inherit;
-    border: none;
-    padding: 0;
-    cursor: inherit;
-    outline: none;
-    margin-right: 8px;
-  }
+  outline: none;
 }

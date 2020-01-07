@@ -31,11 +31,17 @@ function FavoriteMovieBtn(props) {
   };
 
   return (
-    <div className="fav-movie-btn" onClick={handleClick}>
-      <button style={favorited ? styles.liked : styles.unliked}>
-        <FontAwesomeIcon icon={faStar} />{" "}
+    <div onClick={handleClick}>
+      <label className="sr-only" htmlFor="fav-button">
+        {favorited ? "Remove from favorites" : "Add to favorites"}
+      </label>
+      <button
+        className="fav-movie-btn"
+        id="fav-button"
+        style={favorited ? styles.liked : styles.unliked}
+      >
+        <FontAwesomeIcon icon={faStar} />
       </button>
-      {favorited ? "Favorited" : "Click to Favorite"}
     </div>
   );
 }
