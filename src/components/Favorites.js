@@ -1,9 +1,12 @@
 import React from "react";
+import MovieList from "./MovieList";
+import { getFavorites } from "../utils/localStorageAPI";
 
 function Favorites(props) {
   return (
-    <div>
-      <h1>Favorites Page</h1>
+    <div className="page-container">
+      <h2>Favorites</h2>
+      <MovieList movies={getFavorites()} />
     </div>
   );
 }

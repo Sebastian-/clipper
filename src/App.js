@@ -35,6 +35,7 @@ function App() {
             <MovieDetail />
           </Route>
           <Route path="/favorites">
+            <TitleSearch />
             <Favorites />
           </Route>
           <Route path="/rated">
