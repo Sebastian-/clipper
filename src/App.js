@@ -9,6 +9,7 @@ import Rated from "./components/Rated";
 import About from "./components/About";
 import TitleSearch from "./components/TitleSearch";
 import SearchResults from "./components/SearchResults";
+import MovieDetail from "./components/MovieDetail";
 
 function App() {
   return (
@@ -28,6 +29,10 @@ function App() {
           <Route path="/search">
             <TitleSearch />
             <SearchResults />
+          </Route>
+          <Route path="/movie/:id">
+            <TitleSearch />
+            <MovieDetail />
           </Route>
           <Route path="/favorites">
             <Favorites />
