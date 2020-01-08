@@ -7,7 +7,7 @@
   width: 320px;
 
   img {
-    max-width: 300px;
+    width: 300px;
   }
 
   .heading {
@@ -61,6 +61,7 @@
 
     img {
       margin-right: 12px;
+      flex-shrink: 0;
     }
 
     .detail-body {
