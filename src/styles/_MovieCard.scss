@@ -47,6 +47,15 @@
     flex: 1;
   }
 
+  // Ideally, remove flex and use this.
+  // .overview {
+  //   overflow: hidden;
+  //   text-overflow: ellipsis;
+  //   display: -webkit-box;
+  //   -webkit-line-clamp: 5;
+  //   -webkit-box-orient: vertical;
+  // }
+
   .card-footer {
     padding: 10px 5px;
     border-top: 1px solid grey;
