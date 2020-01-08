@@ -1,3 +1,13 @@
+This is a React front-end for browsing movie information provided by The Movie Database (TMDb).
+
+To get started:
+
+1. Sign up for an API key from TMDb.
+2. Paste the "API Read Access Token (v4 auth)" into `credentialsSample.js`
+3. Rename `credentialsSample.js` to `credentials.js`
+4. `yarn/npm install`
+5. `yarn/npm start`
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
